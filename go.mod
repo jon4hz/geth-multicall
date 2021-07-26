@@ -5,7 +5,7 @@ go 1.16
 require (
 	github.com/alethio/web3-go v0.0.6
 	github.com/btcsuite/btcd v0.22.0-beta // indirect
-	github.com/ethereum/go-ethereum v1.10.4
+	github.com/ethereum/go-ethereum v1.10.6
 	github.com/kr/text v0.2.0 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/stretchr/testify v1.7.0
