@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/btcsuite/btcd v0.22.0-beta // indirect
-	github.com/ethereum/go-ethereum v1.10.14
+	github.com/ethereum/go-ethereum v1.10.15
 	github.com/jon4hz/web3-go v0.0.7
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/stretchr/testify v1.7.0
