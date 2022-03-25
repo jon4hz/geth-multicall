@@ -12,8 +12,10 @@ import (
 	"github.com/jon4hz/web3-multicall-go/multicall"
 )
 
+const rpcURL = "https://api.infura.io/v1/jsonrpc/ropsten"
+
 func TestExampleViewCall(t *testing.T) {
-	eth, err := getETH("http://127.0.0.1:8545")
+	eth, err := getETH(rpcURL)
 	if err != nil {
 		panic(err)
 	}
@@ -48,7 +50,7 @@ func getETH(url string) (ethrpc.ETHInterface, error) {
 }
 
 func TestUnmarshaltoUint8(t *testing.T) {
-	eth, err := getETH("http://127.0.0.1:8545")
+	eth, err := getETH(rpcURL)
 	if err != nil {
 		panic(err)
 	}
