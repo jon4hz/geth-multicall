@@ -12,7 +12,7 @@ import (
 	"github.com/jon4hz/web3-multicall-go/multicall"
 )
 
-const rpcURL = "https://api.infura.io/v1/jsonrpc/ropsten"
+const rpcURL = "https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"
 
 func TestExampleViewCall(t *testing.T) {
 	eth, err := getETH(rpcURL)
