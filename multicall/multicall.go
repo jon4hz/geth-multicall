@@ -7,7 +7,6 @@ import (
 	"unsafe"
 
 	"github.com/ethereum/go-ethereum/rpc"
-	"github.com/jon4hz/web3-go/ethrpc"
 
 	"github.com/ethereum/go-ethereum/ethclient"
 )
@@ -86,7 +85,7 @@ func (mc multicall) makeRequest(calls ViewCalls, block string) (string, error) {
 	payload["data"] = AggregateMethod + hex.EncodeToString(payloadArgs)
 	payload["gas"] = mc.config.Gas
 	var resultRaw string
-	err = mc.rpc.Call(&resultRaw, ethrpc.ETHCall, payload, block)
+	err = mc.rpc.Call(&resultRaw, "eth_call", payload, block)
 	return resultRaw, err
 }
 
