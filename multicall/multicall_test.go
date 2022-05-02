@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/ethereum/go-ethereum/ethclient"
-	"github.com/jon4hz/web3-multicall-go/multicall"
+	"github.com/jon4hz/geth-multicall/multicall"
 )
 
 func TestExampleViewCall(t *testing.T) {

@@ -1,4 +1,4 @@
-module github.com/jon4hz/web3-multicall-go
+module github.com/jon4hz/geth-multicall
 
 go 1.16
 
