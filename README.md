@@ -1,13 +1,8 @@
-This fork removed the type BigIntJSONString in favor of the type big.Int. 
-
 ### Multicall
 
 Wrapper for [Multicall](https://github.com/bowd/multicall) which batches calls to contract
 view functions into a single call and reads all the state in one EVM round-trip.
 
-### Usage
-
-The library is used in conjunction with [web3-go](https://github.com/jon4hz/web3-go), and the first parameter to `multicall.New` is an `ethrpc.ETHInterface` as defined in the package.
 
 #### Initialization
 
@@ -17,16 +12,17 @@ We have deployed two variants on Mainnet and Ropsten so far which can be used by
 
 ```go
 // Mainnet
-mc, err := multicall.New(eth, multicall.ContractAddress(multicall.MainnetAddress))
+eth, _ := ethclient.Client("http://127.0.0.1:8545")
+mc, _ := multicall.New(eth, multicall.WithContractAddress(multicall.MainnetAddress))
 // Ropsten
-mc, err := multicall.New(eth, multicall.ContractAddress(multicall.RopstenAddress))
+mc, _ := multicall.New(eth, multicall.WithContractAddress(multicall.RopstenAddress))
 ```
 
 
 You can also set the gas used for the read transaction:
 
 ```go
-mc, err := multicall.New(eth, multicall.ContractAddress(multicall.RopstenAddress), multicall.SetGas(40000))
+mc, err := multicall.New(eth, multicall.WithContractAddress(multicall.RopstenAddress), multicall.WithGas(40000))
 ```
 
 In this case the contract deployed has to maintain the same function signature as the original one.
