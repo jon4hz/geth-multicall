@@ -2,8 +2,14 @@ package multicall
 
 import (
 	"encoding/hex"
+	"fmt"
+	"reflect"
+	"unsafe"
 
+	"github.com/ethereum/go-ethereum/rpc"
 	"github.com/jon4hz/web3-go/ethrpc"
+
+	"github.com/ethereum/go-ethereum/ethclient"
 )
 
 type Multicall interface {
@@ -13,14 +19,22 @@ type Multicall interface {
 }
 
 type multicall struct {
-	eth    ethrpc.ETHInterface
+	rpc    *rpc.Client
 	config *Config
 }
 
-func New(eth ethrpc.ETHInterface, opts ...Option) (Multicall, error) {
+func New(eth *ethclient.Client, opts ...Option) (Multicall, error) {
 	config := &Config{
 		MulticallAddress: MainnetAddress,
 		Gas:              "0x400000000",
+	}
+
+	clientValue := reflect.ValueOf(eth).Elem()
+	fieldStruct := clientValue.FieldByName("c")
+	clientPointer := reflect.NewAt(fieldStruct.Type(), unsafe.Pointer(fieldStruct.UnsafeAddr())).Elem()
+	rpcClient, ok := clientPointer.Interface().(*rpc.Client)
+	if !ok {
+		return nil, fmt.Errorf("failed to get rpc client")
 	}
 
 	for _, opt := range opts {
@@ -28,8 +42,8 @@ func New(eth ethrpc.ETHInterface, opts ...Option) (Multicall, error) {
 	}
 
 	return &multicall{
-		eth:    eth,
 		config: config,
+		rpc:    rpcClient,
 	}, nil
 }
 
@@ -72,7 +86,7 @@ func (mc multicall) makeRequest(calls ViewCalls, block string) (string, error) {
 	payload["data"] = AggregateMethod + hex.EncodeToString(payloadArgs)
 	payload["gas"] = mc.config.Gas
 	var resultRaw string
-	err = mc.eth.MakeRequest(&resultRaw, ethrpc.ETHCall, payload, block)
+	err = mc.rpc.Call(&resultRaw, ethrpc.ETHCall, payload, block)
 	return resultRaw, err
 }
 
