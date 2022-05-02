@@ -22,7 +22,7 @@ func TestExampleViewCall(t *testing.T) {
 		[]interface{}{},
 	)
 	vcs := multicall.ViewCalls{vc}
-	mc, _ := multicall.New(eth, multicall.ContractAddress(multicall.RopstenAddress))
+	mc, _ := multicall.New(eth, multicall.WithContractAddress(multicall.RopstenAddress))
 	block := "latest"
 	res, err := mc.Call(vcs, block)
 	if err != nil {
@@ -52,7 +52,7 @@ func TestUnmarshaltoUint8(t *testing.T) {
 		[]interface{}{},
 	)
 	vcs := multicall.ViewCalls{vc}
-	mc, _ := multicall.New(eth, multicall.ContractAddress(multicall.RopstenAddress))
+	mc, _ := multicall.New(eth, multicall.WithContractAddress(multicall.RopstenAddress))
 	block := "latest"
 	res, err := mc.Call(vcs, block)
 	if err != nil {
@@ -78,7 +78,7 @@ func TestUnmarshaltoUint8OoverWS(t *testing.T) {
 		[]interface{}{},
 	)
 	vcs := multicall.ViewCalls{vc}
-	mc, _ := multicall.New(eth, multicall.ContractAddress(multicall.RopstenAddress))
+	mc, _ := multicall.New(eth, multicall.WithContractAddress(multicall.RopstenAddress))
 	block := "latest"
 	res, err := mc.Call(vcs, block)
 	if err != nil {

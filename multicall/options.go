@@ -6,7 +6,7 @@ type Option func(*Config)
 
 type Config struct {
 	MulticallAddress string
-	Gas				 string
+	Gas              string
 }
 
 const (
@@ -16,20 +16,19 @@ const (
 	RopstenAddress = "0xf3ad7e31b052ff96566eedd218a823430e74b406"
 )
 
-
-func ContractAddress(address string) Option {
+func WithContractAddress(address string) Option {
 	return func(c *Config) {
 		c.MulticallAddress = address
 	}
 }
 
-func SetGas(gas uint64) Option {
+func WithGas(gas uint64) Option {
 	return func(c *Config) {
 		c.Gas = fmt.Sprintf("0x%x", gas)
 	}
 }
 
-func SetGasHex(gas string) Option {
+func WithGasHex(gas string) Option {
 	return func(c *Config) {
 		c.Gas = gas
 	}
